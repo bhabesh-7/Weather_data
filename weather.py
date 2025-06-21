@@ -4,13 +4,18 @@ from email.mime.text import MIMEText
 from datetime import datetime
 import streamlit as st
 import pandas as pd
+from dotenv import load_dotenv
+import os
+
+# Load environment variables
+load_dotenv()
+API_KEY = os.getenv("API_KEY")
+EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
+EMAIL_SENDER = os.getenv("EMAIL_SENDER")
+EMAIL_RECEIVER = os.getenv("EMAIL_RECEIVER")
 
 # Configuration
 CITY = "Sehore"  # Indian city
-API_KEY = "2f5743af955e475586b93427252106"  # Your WeatherAPI key
-EMAIL_SENDER = "dummy94377992@gmail.com"  # Your Gmail address
-EMAIL_PASSWORD = "fzjw wqrx eiul ukak"  # Your Gmail App Password
-EMAIL_RECEIVER = "bhabeshbk.7@gmail.com"  # Recipient email
 
 # Fetch current weather data
 def get_current_weather(city, api_key):
@@ -103,7 +108,6 @@ def weather_job():
 
 # Streamlit UI
 def display_ui(weather_data, current_text, forecast_text, astronomy_text):
-    # Force light mode
     st.config.set_option("theme.base", "light")
     st.set_page_config(page_title=f"Weather in {CITY}", page_icon="🌦️", layout="wide")
     st.title(f"Weather Update for {CITY}")
